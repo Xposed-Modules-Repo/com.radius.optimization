@@ -16,34 +16,6 @@
 - **依赖框架**: LSPosed / 其他 Xposed 框架
 - **API 版本**: YukiHookAPI 1.3.0
 
-## 🔧 安装方法
-
-### 前提条件
-1. 已安装并激活 Xposed 框架 (推荐 LSPosed)
-2. 确保目标应用为 ColorOS 系统桌面
-
-### 安装步骤
-1. 下载最新版本的 APK 文件
-2. 安装到你的设备
-3. 在 Xposed 管理器中启用本模块
-4. 在模块作用域中勾选「系统桌面」
-5. 重启设备或软重启系统桌面
-
 ## ⚙️ 配置说明
 
-系统桌面最近任务卡片圆角初始值为`16dp`，模块更改圆角值为`26dp`，如需自定义圆角值，请在`app/src/main/java/com/radius/optimization/HookEntry.kt`中的`第27行`进行更改
-
-
-## 🛠️ 构建说明
-
-### 环境要求
-- Android SDK 30+
-- Java 17
-
-### 构建步骤
-```bash
-# 克隆项目
-git clone https://github.com/Qjj7679/Oplus-Launcher-RadiusOptimization.git
-
-# 构建并安装
-./gradlew assembleDebug
+系统桌面最近任务卡片圆角初始值为`16dp`，模块更改圆角值为`26dp`，如需自定义圆角值，请在`/app/src/main/java/com/radius/optimization/HookEntry.kt`中的`第27行`进行更改

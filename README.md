@@ -1,21 +1,40 @@
-# Oplus Launcher Radius Optimization
+# ColorOS Recent Task View Radius
 
-一个基于 YukiHookAPI 开发的 Xposed 模块，用于优化 ColorOS 系统桌面的最近任务卡片圆角效果。
+![License](https://img.shields.io/github/license/Qjj7679/ColorOS_Recent_Task_View_Radius?style=flat-square)
 
-## ✨ 功能特性
+为 ColorOS 桌面（Launcher）的最近任务卡片圆角提供可调节的 Xposed/YukiHookAPI 模块。UI 通过 ContentProvider 写入配置，Hook 在 Launcher 中读取并替换 `recent_task_view_radius`。
 
-- 🎨 **自定义圆角半径** - 调整最近任务卡片的圆角大小
-- 🎯 **精准目标** - 仅针对 ColorOS 系统桌面 (`com.android.launcher`)
-- ⚡ **轻量高效** - 低资源占用，不影响系统性能
-- 🔒 **安全稳定** - 不修改系统核心文件，可随时禁用
+## 功能
+- 调节最近任务卡片圆角（dp）
+- 取值范围：16–130 dp
+- 调整后需重启桌面或重启设备生效
 
-## 📋 兼容性
+## 项目结构
+```
+app/src/main/kotlin/com/radius/optimization
+├─ RadiusConfig.kt          # 常量与配置 URI
+├─ RadiusConfigProvider.kt  # Provider 存取
+├─ MainHook.kt              # Launcher Hook
+└─ MainActivity.kt          # Compose UI
+```
 
-- **目标应用**: ColorOS 系统桌面 (`com.android.launcher`)
-- **Android 版本**: Android 16/15 (ColorOS 16-15 / RealmeUI 7-6 / OxygenOS 16-15)
-- **依赖框架**: LSPosed / 其他 Xposed 框架
-- **API 版本**: YukiHookAPI 1.3.0
+## 配置通道
+- authority: `com.radius.optimization.config`
+- path: `radius_dp`
+- URI: `content://com.radius.optimization.config/radius_dp`
 
-## ⚙️ 配置说明
+## 构建
+```bash
+./gradlew assembleDebug --no-daemon
+```
+APK 输出：
+```
+app/build/outputs/apk/debug/app-debug.apk
+```
 
-系统桌面最近任务卡片圆角初始值为`16dp`，模块更改圆角值为`26dp`，如需自定义圆角值，请在`/app/src/main/java/com/radius/optimization/HookEntry.kt`中的`第27行`进行更改
+## 说明
+- Hook 侧已做进程内缓存，首次读取后缓存；重启桌面会重新读取。
+- 使用方法级 Hook（`Resources.getDimensionPixelSize(int)`）替换 `recent_task_view_radius`。
+
+## License
+MIT
